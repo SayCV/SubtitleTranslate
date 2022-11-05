@@ -3,7 +3,7 @@ from util_trans import Translator
 import srt
 
 
-def simple_translate_srt(origin_sub: list, src_lang: str, target_lang: str) -> list:
+def simple_translate_srt(origin_sub: list, src_lang: str, target_lang: str, engine: str) -> list:
     """
     Naive srt translation
     :param origin_sub: list of srt.Subtitle
@@ -12,7 +12,7 @@ def simple_translate_srt(origin_sub: list, src_lang: str, target_lang: str) -> l
     :return: translated subtitle content list
     """
     # Initialize a translator
-    t = Translator()
+    t = Translator(engine)
 
     sen_list = [sub.content.replace('\n', '') for sub in origin_sub]
 
@@ -23,7 +23,7 @@ def simple_translate_srt(origin_sub: list, src_lang: str, target_lang: str) -> l
     return translated_sen_list
 
 
-def translate_srt(origin_sub: list, src_lang: str, target_lang: str, space=False) -> list:
+def translate_srt(origin_sub: list, src_lang: str, target_lang: str, engine: str, space=False) -> list:
     """
     Translate the srt
         Afrikaans	af      Albanian	sq      Amharic	am      Arabic	ar      Armenian	hy      Azerbaijani	az
@@ -47,7 +47,7 @@ def translate_srt(origin_sub: list, src_lang: str, target_lang: str, space=False
     :return: translated subtitle content list
     """
     # Initialize a translator
-    t = Translator()
+    t = Translator(engine)
 
     # Reconstruct plain text of the whole subtitle file.
     # Record the index of each dialogue in the plain text.
@@ -73,7 +73,7 @@ def translate_srt(origin_sub: list, src_lang: str, target_lang: str, space=False
     return dialog_list
 
 
-def translate_and_compose(input_file, output_file, src_lang: str, target_lang: str, encoding='UTF-8', mode='split', both=True, space=False):
+def translate_and_compose(input_file, output_file, src_lang: str, target_lang: str, engine='google', encoding='UTF-8', mode='split', both=True, space=False):
     """
     Translate the srt file
         Afrikaans	af      Albanian	sq      Amharic	am      Arabic	ar      Armenian	hy      Azerbaijani	az
@@ -106,9 +106,9 @@ def translate_and_compose(input_file, output_file, src_lang: str, target_lang: s
     subtitle = list(srt.parse(srt_file.read()))
 
     if mode == 'naive':
-        translated_list = simple_translate_srt(subtitle, src_lang, target_lang)
+        translated_list = simple_translate_srt(subtitle, src_lang, target_lang, engine=engine)
     else:
-        translated_list = translate_srt(subtitle, src_lang, target_lang, space=space)
+        translated_list = translate_srt(subtitle, src_lang, target_lang, engine=engine, space=space)
 
     if len(subtitle) == len(translated_list):
         if both:

@@ -6,6 +6,7 @@ import urllib.error
 import json
 import time
 
+from trans_baidu import Baidu_Translator
 
 class TkGenerator:
     """
@@ -56,13 +57,11 @@ class TkGenerator:
     def get_tk(self, text: str) -> str:
         return self.ctx.call("TL", text)
 
-
-class Translator:
+class Google_Translator:
     def __init__(self):
         self.headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:23.0) Gecko/20100101 Firefox/23.0'}
         self.tk_gen = TkGenerator()
         self.pattern = re.compile(r'\["(.*?)(?:\\n)')
-        self.max_limited = 3500
 
     def __post(self, url, text):
         post_data = {
@@ -73,7 +72,7 @@ class Translator:
         response = urllib.request.urlopen(request)
         return response.read().decode('utf-8')
 
-    def __translate(self, text, src_lang, target_lang) -> str:
+    def translate(self, text, src_lang, target_lang) -> str:
         tk = self.tk_gen.get_tk(text)
         url = "http://translate.google.hk/translate_a/single?client=t" \
               "&sl=%s&tl=%s&dt=at&dt=bd&dt=ex&dt=ld&dt=md&dt=qca" \
@@ -82,6 +81,20 @@ class Translator:
 
         result = self.__post(url, text)
         return result
+
+class Translator:
+    def __init__(self, engine):
+        self.engine = engine
+        self.max_limited = 3500
+
+    def __translate(self, text, src_lang, target_lang) -> str:
+        if self.engine == 'google':
+            _tool = Google_Translator()
+        elif self.engine == 'baidu':
+            _tool = Baidu_Translator()
+        elif self.engine == 'bing':
+            _tool = Bing_Translator()
+        return _tool.translate(text, src_lang, target_lang)
 
     def translate_raw(self, text: str, src_lang: str, target_lang: str) -> str:
         """

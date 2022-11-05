@@ -49,6 +49,10 @@ def run_translate():
         dest='encoding',
         help='Define the source file encoding')
     parser.add_argument(
+        '--engine',
+        dest='engine',
+        help='Define the trans engine: baidu, google, bing')
+    parser.add_argument(
         '--verbose',
         '-v',
         action='store_true',
@@ -62,6 +66,9 @@ def run_translate():
         action='store_true',
         help='space')
     args = parser.parse_args()
+
+    if args.engine is None:
+        args.engine = "baidu"
 
     if args.input is None:
         args.input = "sample2.en.srt"
@@ -88,6 +95,7 @@ def run_translate():
         print(f'Output file is: {args.output}')
         print(f'both: {args.both}')
         print(f'space: {args.space}')
+        print(f'engine: {args.engine}')
         print(f'encoding: {args.encoding}')
         print(f'verbose: {args.verbose}')
 
@@ -101,7 +109,7 @@ def run_translate():
     if dst_lang == 'chs':
         dst_lang = 'zh-CN'
 
-    translate_and_compose(input_file, output_file, src_lang, dst_lang, encoding = args.encoding, both = args.both)
+    translate_and_compose(input_file, output_file, src_lang, dst_lang, engine = args.engine, encoding = args.encoding, both = args.both)
 
 if __name__ == '__main__':
     # run_translate_ex1()
