@@ -75,7 +75,7 @@ class Translator:
 
     def __translate(self, text, src_lang, target_lang) -> str:
         tk = self.tk_gen.get_tk(text)
-        url = "http://translate.google.cn/translate_a/single?client=t" \
+        url = "http://translate.google.hk/translate_a/single?client=t" \
               "&sl=%s&tl=%s&dt=at&dt=bd&dt=ex&dt=ld&dt=md&dt=qca" \
               "&dt=rw&dt=rm&dt=ss&dt=t&ie=UTF-8&oe=UTF-8&clearbtn=1&otf=1&pc=1" \
               "&srcrom=0&ssel=0&tsel=0&kc=1&tk=%s" % (src_lang, target_lang, tk)

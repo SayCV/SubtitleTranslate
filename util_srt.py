@@ -154,6 +154,8 @@ def sen_list2dialog_list(sen_list, mass_list, space=False, cn=False) -> list:
     for k in range(len(sen_list)):
         sentence = sen_list[k]
         record = mass_list[k]
+        if not record:
+            continue
 
         total_dialog_of_sentence = len(record)
 
