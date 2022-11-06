@@ -8,6 +8,7 @@ import time
 
 from trans_baidu import Baidu_Translator
 
+
 class TkGenerator:
     """
     Compute the "TK" of the string.
@@ -57,9 +58,11 @@ class TkGenerator:
     def get_tk(self, text: str) -> str:
         return self.ctx.call("TL", text)
 
+
 class Google_Translator:
     def __init__(self):
-        self.headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:23.0) Gecko/20100101 Firefox/23.0'}
+        self.headers = {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:23.0) Gecko/20100101 Firefox/23.0'}
         self.tk_gen = TkGenerator()
         self.pattern = re.compile(r'\["(.*?)(?:\\n)')
 
@@ -68,7 +71,8 @@ class Google_Translator:
             'q': text
         }
         data = urllib.parse.urlencode(post_data).encode(encoding='utf-8')
-        request = urllib.request.Request(url=url, data=data, headers=self.headers)
+        request = urllib.request.Request(
+            url=url, data=data, headers=self.headers)
         response = urllib.request.urlopen(request)
         return response.read().decode('utf-8')
 
@@ -77,13 +81,15 @@ class Google_Translator:
         url = "http://translate.google.hk/translate_a/single?client=t" \
               "&sl=%s&tl=%s&dt=at&dt=bd&dt=ex&dt=ld&dt=md&dt=qca" \
               "&dt=rw&dt=rm&dt=ss&dt=t&ie=UTF-8&oe=UTF-8&clearbtn=1&otf=1&pc=1" \
-              "&srcrom=0&ssel=0&tsel=0&kc=1&tk=%s" % (src_lang, target_lang, tk)
+              "&srcrom=0&ssel=0&tsel=0&kc=1&tk=%s" % (
+                  src_lang, target_lang, tk)
 
         result = self.__post(url, text)
         # return json.loads(result)
         obj_result = json.loads(result)
         result = [x[0] for x in obj_result[0][:-1]]
         return result
+
 
 class Translator:
     def __init__(self, engine):
@@ -148,13 +154,15 @@ class Translator:
         for i in range(len(text_list)):
             total_length += len(text_list[i])
             if total_length > self.max_limited:
-                translated += self.translate('\n'.join(text_list[last_idx:i]), src_lang, target_lang)
+                translated += self.translate(
+                    '\n'.join(text_list[last_idx:i]), src_lang, target_lang)
                 translated += '\n'
                 time.sleep(1)
                 last_idx = i
                 total_length = 0
-        translated += self.translate('\n'.join(text_list[last_idx:]), src_lang, target_lang)
-        return translated.replace('\n\n', '\n').strip('\n')
+        translated += self.translate(
+            '\n'.join(text_list[last_idx:]), src_lang, target_lang)
+        return translated.replace('\n\n', '\n').replace('</我>', '</i>').strip('\n')
 
 
 if __name__ == '__main__':
@@ -166,5 +174,3 @@ if __name__ == '__main__':
     # print(t.translate(raw_text, src_lang='en', target_lang='Zh-CN'))
     print(t.translate(raw_text, src_lang='en', target_lang='zh'))
     # print(t.translate(raw_text, src_lang='en', target_lang='ja'))
-
-
