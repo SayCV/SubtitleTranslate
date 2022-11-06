@@ -71,7 +71,7 @@ def run_translate():
         args.engine = "baidu"
 
     if args.input is None:
-        args.input = "sample2.en.srt"
+        args.input = "sample.en.srt"
 
     if args.encoding is None:
         args.encoding = "UTF-8"
@@ -86,9 +86,7 @@ def run_translate():
         in_file_name1, in_file_ext1 = os.path.splitext(args.input)
         in_file_name2, in_file_ext2 = os.path.splitext(in_file_name1)
         out_file_lang =  args.dst
-        if args.both:
-            out_file_lang =  args.dst + '+' + args.src
-        args.output = in_file_name2 + '.' + out_file_lang + ".srt"
+        args.output = in_file_name2 + '.' + out_file_lang + in_file_ext1
 
     if args.verbose:
         print(f'Input file is: {args.input}')

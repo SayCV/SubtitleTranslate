@@ -1,7 +1,7 @@
 from util_srt import *
 from util_trans import Translator
 import srt
-
+import os
 
 def simple_translate_srt(origin_sub: list, src_lang: str, target_lang: str, engine: str) -> list:
     """
@@ -104,6 +104,7 @@ def translate_and_compose(input_file, output_file, src_lang: str, target_lang: s
     """
     srt_file = open(input_file, encoding=encoding)
     subtitle = list(srt.parse(srt_file.read()))
+    both_subtitle = {}
 
     if mode == 'naive':
         translated_list = simple_translate_srt(subtitle, src_lang, target_lang, engine=engine)
@@ -111,12 +112,13 @@ def translate_and_compose(input_file, output_file, src_lang: str, target_lang: s
         translated_list = translate_srt(subtitle, src_lang, target_lang, engine=engine, space=space)
 
     if len(subtitle) == len(translated_list):
+        for i in range(len(subtitle)):
+            subtitle[i].content = translated_list[i]
         if both:
-            for i in range(len(subtitle)):
-                subtitle[i].content = translated_list[i] + '\n' + subtitle[i].content.replace('\n', ' ')
-        else:
-            for i in range(len(subtitle)):
-                subtitle[i].content = translated_list[i]
+            both_subtitle = subtitle.copy()
+            for i in range(len(both_subtitle)):
+                both_subtitle[i].content = translated_list[i] + '\n' + both_subtitle[i].content.replace('\n', ' ')
+
     else:
         print('Error')
         return
@@ -124,6 +126,8 @@ def translate_and_compose(input_file, output_file, src_lang: str, target_lang: s
     with open(output_file, 'w', encoding='UTF-8') as f:
         f.write(srt.compose(subtitle))
 
-
-
-
+    if both:
+        _, out_file_ext1 = os.path.splitext(output_file)
+        both_output_file = output_file.replace(f'.{target_lang}.{out_file_ext1}', f'.{target_lang}+{src_lang}.{out_file_ext1}')
+        with open(both_output_file, 'w', encoding='UTF-8') as f:
+            f.write(srt.compose(both_subtitle))

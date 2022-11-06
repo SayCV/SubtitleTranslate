@@ -72,7 +72,7 @@ class Google_Translator:
         response = urllib.request.urlopen(request)
         return response.read().decode('utf-8')
 
-    def translate(self, text, src_lang, target_lang) -> str:
+    def translate(self, text, src_lang, target_lang) -> list:
         tk = self.tk_gen.get_tk(text)
         url = "http://translate.google.hk/translate_a/single?client=t" \
               "&sl=%s&tl=%s&dt=at&dt=bd&dt=ex&dt=ld&dt=md&dt=qca" \
@@ -80,6 +80,9 @@ class Google_Translator:
               "&srcrom=0&ssel=0&tsel=0&kc=1&tk=%s" % (src_lang, target_lang, tk)
 
         result = self.__post(url, text)
+        # return json.loads(result)
+        obj_result = json.loads(result)
+        result = [x[0] for x in obj_result[0][:-1]]
         return result
 
 class Translator:
@@ -126,9 +129,8 @@ class Translator:
         :return: translated text
         """
         result = self.__translate(text, src_lang, target_lang)
-        obj_result = json.loads(result)
-
-        list_sentence = [x[0] for x in obj_result[0][:-1]]
+        list_sentence = result
+        #list_sentence = [x[0] for x in obj_result[0][:-1]]
 
         return ''.join(list_sentence)
 
@@ -152,16 +154,17 @@ class Translator:
                 last_idx = i
                 total_length = 0
         translated += self.translate('\n'.join(text_list[last_idx:]), src_lang, target_lang)
-        return translated
+        return translated.replace('\n\n', '\n').strip('\n')
 
 
 if __name__ == '__main__':
-    t = Translator()
+    t = Translator("baidu")
     raw_text = "The Translation API's recognition engine supports a wide variety of languages for the Phrase-Based \
     Machine Translation (PBMT) and Neural Machine Translation (NMT) models. \nThese languages are specified within a \
     recognition request using language code parameters as noted on this page. \nMost language code parameters conform \
     to ISO-639-1 identifiers, except where noted."
-    print(t.translate(raw_text, src_lang='en', target_lang='Zh-CN'))
-    print(t.translate(raw_text, src_lang='en', target_lang='ja'))
+    # print(t.translate(raw_text, src_lang='en', target_lang='Zh-CN'))
+    print(t.translate(raw_text, src_lang='en', target_lang='zh'))
+    # print(t.translate(raw_text, src_lang='en', target_lang='ja'))
 
 

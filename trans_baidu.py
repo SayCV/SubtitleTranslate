@@ -64,8 +64,11 @@ class Baidu_Translator:
             'token': token,
         }
         self.headers["Acs-Token"] = acs_token
-        response = self.session.post(url=self.basetrans_url, headers=self.headers, data=data)
-        result = response.json()['trans_result']['data'][0]['dst']
+        response = self.session.post(url=self.translate_api, headers=self.headers, data=data)
+        _data = response.json()['trans_result']['data']
+        # _dst = _data[0]['dst']
+        _data_lines = [x['dst'].strip('\n')+'\n' for x in _data]
+        result = _data_lines
         return result
 
     def translate(self, text, src_lang, target_lang) -> str:
@@ -80,11 +83,11 @@ class Baidu_Translator:
 
 def main():
     trans = Baidu_Translator()
-    query = input('请输入要翻译的文字：')
+    query = 'power'
     token, gtk, lang = trans.get_params(query)
     sign, acs_token = trans.get_sign_and_token(query, gtk, lang)
-    result = trans.get_result(query, lang, sign, token, acs_token)
-    print('翻译成英文的结果为：', result)
+    result = trans.get_result(query, lang, 'zh', sign, token, acs_token)
+    print('翻译成中文的结果为：', result)
 
 
 if __name__ == '__main__':
