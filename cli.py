@@ -33,6 +33,7 @@ def run_translate():
         '--input',
         '-i',
         dest='input',
+        default='sample.en.srt',
         help='The path to the input file')
     parser.add_argument(
         '--output',
@@ -42,19 +43,28 @@ def run_translate():
     parser.add_argument(
         '--src',
         dest='src',
+        default='eng',
         help='Define the source subtitle language')
     parser.add_argument(
         '--dst',
         dest='dst',
+        default='chs',
         help='Define the target subtitle language')
     parser.add_argument(
         '--encoding',
         dest='encoding',
+        default='UTF-8',
         help='Define the source file encoding')
     parser.add_argument(
         '--engine',
         dest='engine',
+        default='baidu',
         help='Define the trans engine: baidu, google, bing')
+    parser.add_argument(
+        '--model',
+        dest='model',
+        default='naive',
+        help='Define the trans model: naive, split')
     parser.add_argument(
         '--verbose',
         '-v',
@@ -69,21 +79,6 @@ def run_translate():
         action='store_true',
         help='space')
     args = parser.parse_args()
-
-    if args.engine is None:
-        args.engine = "baidu"
-
-    if args.input is None:
-        args.input = "sample.en.srt"
-
-    if args.encoding is None:
-        args.encoding = "UTF-8"
-
-    if args.src is None:
-        args.src = "eng"
-
-    if args.dst is None:
-        args.dst = "chs"
 
     output_file2 = ''
     if args.output is None:
@@ -101,6 +96,7 @@ def run_translate():
         print(f'space: {args.space}')
         print(f'engine: {args.engine}')
         print(f'encoding: {args.encoding}')
+        print(f'model: {args.model}')
         print(f'verbose: {args.verbose}')
 
     input_file = args.input
@@ -114,7 +110,7 @@ def run_translate():
         dst_lang = 'zh-CN'
 
     translate_and_compose(input_file, output_file, output_file2, src_lang,
-                          dst_lang, engine=args.engine, encoding=args.encoding, both=args.both)
+                          dst_lang, engine=args.engine, encoding=args.encoding, mode=args.model, both=args.both)
 
 
 if __name__ == '__main__':
