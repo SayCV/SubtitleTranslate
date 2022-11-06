@@ -109,7 +109,7 @@ def translate_and_compose(input_file, output_file, output_file2, src_lang: str, 
     subtitle = list(srt.parse(srt_file.read()))
     both_subtitle = {}
 
-    if True:
+    if False:
         in_file_name, in_file_ext = os.path.splitext(input_file)
         _tmp_file = in_file_name + '.merge' + in_file_ext
         with open(_tmp_file, 'w', encoding='UTF-8') as f:
