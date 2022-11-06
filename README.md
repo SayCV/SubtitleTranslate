@@ -8,7 +8,7 @@ Only support \*.srt file currently.
     pip install pyexecjs
     pip install srt
 
-if you are from China, please install jieba
+if you are from China, please install jieba and nodejs
 
     pip install jieba
 

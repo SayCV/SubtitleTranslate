@@ -6,7 +6,8 @@
 # @Software: PyCharm
 # ==================================
 
-
+import sys
+import os
 import re
 import execjs
 import requests
@@ -42,9 +43,15 @@ class Baidu_Translator:
         lang = response_lang.json()['lan']
         return token, gtk, lang
 
-
     def get_sign_and_token(self, query, gtk, lang):
-        with open('baidufanyi_encrypt.js', 'r', encoding='utf-8') as f:
+        def thisscript_file_dir():
+            path = sys.path[0]
+            if os.path.isdir(path):
+                return path
+            elif os.path.isfile(path):
+                return os.path.dirname(path)
+
+        with open(thisscript_file_dir() + '/baidufanyi_encrypt.js', 'r', encoding='utf-8') as f:
             baidu_js = f.read()
         sign = execjs.compile(baidu_js).call('e', query, gtk)
         translate_url = 'https://fanyi.baidu.com/#%s/en/%s' % (
