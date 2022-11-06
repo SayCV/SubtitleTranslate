@@ -2,6 +2,7 @@ from util_srt import *
 from util_trans import Translator
 import srt
 import os
+import copy
 
 def simple_translate_srt(origin_sub: list, src_lang: str, target_lang: str, engine: str) -> list:
     """
@@ -66,14 +67,16 @@ def translate_srt(origin_sub: list, src_lang: str, target_lang: str, engine: str
 
     # split the translated_sen by the timestamp in the srt file
     if target_lang == 'zh-CN':
-        dialog_list = sen_list2dialog_list(translated_sen_list, mass_list, space, cn=True)
+        dialog_list = sen_list2dialog_list(
+            translated_sen_list, mass_list, space, cn=True)
     else:
-        dialog_list = sen_list2dialog_list(translated_sen_list, mass_list, space, cn=False)
+        dialog_list = sen_list2dialog_list(
+            translated_sen_list, mass_list, space, cn=False)
 
     return dialog_list
 
 
-def translate_and_compose(input_file, output_file, src_lang: str, target_lang: str, engine='google', encoding='UTF-8', mode='split', both=True, space=False):
+def translate_and_compose(input_file, output_file, output_file2, src_lang: str, target_lang: str, engine='google', encoding='UTF-8', mode='split', both=True, space=False):
     """
     Translate the srt file
         Afrikaans	af      Albanian	sq      Amharic	am      Arabic	ar      Armenian	hy      Azerbaijani	az
@@ -107,18 +110,18 @@ def translate_and_compose(input_file, output_file, src_lang: str, target_lang: s
     both_subtitle = {}
 
     if mode == 'naive':
-        translated_list = simple_translate_srt(subtitle, src_lang, target_lang, engine=engine)
+        translated_list = simple_translate_srt(
+            subtitle, src_lang, target_lang, engine=engine)
     else:
-        translated_list = translate_srt(subtitle, src_lang, target_lang, engine=engine, space=space)
+        translated_list = translate_srt(
+            subtitle, src_lang, target_lang, engine=engine, space=space)
+
+    if both:
+        both_subtitle = copy.deepcopy(subtitle)
 
     if len(subtitle) == len(translated_list):
         for i in range(len(subtitle)):
             subtitle[i].content = translated_list[i]
-        if both:
-            both_subtitle = subtitle.copy()
-            for i in range(len(both_subtitle)):
-                both_subtitle[i].content = translated_list[i] + '\n' + both_subtitle[i].content.replace('\n', ' ')
-
     else:
         print('Error')
         return
@@ -127,7 +130,13 @@ def translate_and_compose(input_file, output_file, src_lang: str, target_lang: s
         f.write(srt.compose(subtitle))
 
     if both:
-        _, out_file_ext1 = os.path.splitext(output_file)
-        both_output_file = output_file.replace(f'.{target_lang}.{out_file_ext1}', f'.{target_lang}+{src_lang}.{out_file_ext1}')
-        with open(both_output_file, 'w', encoding='UTF-8') as f:
+        if len(both_subtitle) == len(translated_list):
+            for i in range(len(both_subtitle)):
+                both_subtitle[i].content = translated_list[i] + \
+                    '\n' + both_subtitle[i].content.replace('\n', ' ')
+        else:
+            print('Error')
+            return
+
+        with open(output_file2, 'w', encoding='UTF-8') as f:
             f.write(srt.compose(both_subtitle))
