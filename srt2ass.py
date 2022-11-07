@@ -101,10 +101,10 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
     pattern = re.compile(r'\d{1,4}\r\n(\d{1,2}:\d{1,2}:\d{1,2}\.\d{1,3}) ?--> ?(\d{1,2}:\d{1,2}:\d{1,2}\.\d{1,3})\r\n(.+)\r\n(.+)\r\n')
     tmp = pattern.sub(r'Dialogue: 0,\1,\2,Default,,0,0,0,,\3\\N\4', tmp)
 
-#    tmp = tmp.replace('\r\n', '\\N')
-#    tmp = re.sub(r'(\\N){1,8}', r'\\N', tmp)
-#    tmp = re.sub(r'(\\N){1,8}$', '', tmp)
-#    tmp = tmp.replace('\\NDialogue:', '\r\nDialogue:')
+    tmp = tmp.replace('\r\n', '\\N')
+    tmp = re.sub(r'(\\N){1,8}', r'\\N', tmp)
+    tmp = re.sub(r'(\\N){1,8}$', '', tmp)
+    tmp = tmp.replace('\\NDialogue:', '\r\nDialogue:')
 
     output_str = head_str + '\n' + tmp
     # print output_str.decode('utf-8')
