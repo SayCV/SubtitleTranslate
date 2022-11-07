@@ -76,7 +76,7 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
 
     # match dialogue: `双行`
     pattern = re.compile(r'\d{1,4}\r\n(\d{1,2}:\d{1,2}:\d{1,2}\.\d{1,3}) ?--> ?(\d{1,2}:\d{1,2}:\d{1,2}\.\d{1,3})\r\n(.+)\r\n([ !\w\.,?\'\"-:;\(\)%$@&*\^+~<>]+)\r\n')
-    tmp = pattern.sub(r'Dialogue: 0,\1,\2,Default,,0,0,0,,\3\\N{\\rEN}\4', tmp)
+    tmp = pattern.sub(r'Dialogue: 0,\1,\2,Default,,0,0,0,,\3\\N{\\rEN}\4 ', tmp)
 
     # match dialogue: `单行`
     pattern = re.compile(r'\d{1,4}\r\n(\d{1,2}:\d{1,2}:\d{1,2}\.\d{1,3}) ?--> ?(\d{1,2}:\d{1,2}:\d{1,2}\.\d{1,3})\r\n(.+)\r\n\r\n')
@@ -106,7 +106,7 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
     tmp = re.sub(r'(\\N){1,8}$', '', tmp)
     tmp = tmp.replace('\\NDialogue:', '\r\nDialogue:')
 
-    output_str = head_str + '\n' + tmp
+    output_str = head_str + '\n' + tmp.strip(' ')
     # print output_str.decode('utf-8')
     
     with open(output_file + '.ass', 'wb') as output:
