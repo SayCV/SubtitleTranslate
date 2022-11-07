@@ -33,6 +33,7 @@ ScriptType: v4.00+
 WrapStyle: 0
 ScaledBorderAndShadow: no
 YCbCr Matrix: None
+
 [V4+ Styles]
 Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
 Style: Default,sarasa-mono,28,&H00FFFFFF,&H00000000,&H00000000,&H00FF8000,0,0,0,0,100,100,0,0.00,1,2,1,2,5,5,6,134
@@ -41,8 +42,11 @@ Style: 注释,微软雅黑,18,&H00FFFFFF,&HFF000000,&H00000000,&H00000000,0,0,0,
 Style: 特效,微软雅黑,20,&H00FFFFFF,&HFF000000,&H00000000,&H00000000,0,0,0,0,100,100,0,0,1,0,0,2,5,5,5,1
 Style: 歌词,微软雅黑,14,&H00FFFFFF,&H00000000,&H00000000,&H00000000,0,-1,0,0,100,100,0,0,1,1,0,1,25,5,43,1
 Style: 特效 - 复制,微软雅黑,20,&H00FFFFFF,&HFF0019FF,&H00000000,&H00000000,0,0,0,0,100,100,0,0,3,1,0,2,10,10,10,1
+
 [Events]
-Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text'''
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+
+'''
     
     tmp = fileopen(input_file).decode()
 
