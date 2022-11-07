@@ -162,7 +162,7 @@ class Translator:
                 total_length = 0
         translated += self.translate(
             '\n'.join(text_list[last_idx:]), src_lang, target_lang)
-        return translated.replace('\n\n', '\n').replace('</我>', '</i>').replace('性交', 'TMD').strip('\n')
+        return translated.replace('\n\n', '\n').replace('</我>', '</i>').replace('\u6027\u4ea4', 'TMD').strip('\n')
 
 
 if __name__ == '__main__':
