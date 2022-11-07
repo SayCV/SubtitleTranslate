@@ -53,34 +53,58 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
     tmp = tmp + '\r\n\r\n'
     tmp = tmp.replace('{', '')
     tmp = tmp.replace('}', '')
+
+    # match timestamp: `00:00:06,000` -> 00:00:06.000
     pattern = re.compile(r'(\d{1,2}:\d{1,2}:\d{1,2}),(\d{1,3})')
     tmp = pattern.sub(r'\1.\2', tmp)
+
+    # remove blank line: `00:00:06.000 --> 00:00:58.101`
     pattern = re.compile(r'(\d{1,2}:\d{1,2}:\d{1,2}\.\d{1,3} ?--> ?\d{1,2}:\d{1,2}:\d{1,2}\.\d{1,3})\r\n\r\n')
     tmp = pattern.sub(r'\1\r\n', tmp)
+
+    # match dialogue: `\an1\pos(...)`
     pattern = re.compile(r'\d{1,4}\r\n(\d{1,2}:\d{1,2}:\d{1,2}\.\d{1,3}) ?--> ?(\d{1,2}:\d{1,2}:\d{1,2}\.\d{1,3})\r\n(\\an\d\\pos\(.+\))')
     tmp = pattern.sub(r'Dialogue: 0,\1,\2,注释,,0,0,0,,{\3\\fad(500,500)\\fs20}', tmp)
+
+    # match dialogue: `\pos(...)`
     pattern = re.compile(r'\d{1,4}\r\n(\d{1,2}:\d{1,2}:\d{1,2}\.\d{1,3}) ?--> ?(\d{1,2}:\d{1,2}:\d{1,2}\.\d{1,3})\r\n(\\pos\(.+\))')
     tmp = pattern.sub(r'Dialogue: 0,\1,\2,注释,,0,0,0,,{\3\\fad(500,500)\\fs20}', tmp)
+
+    # match dialogue: `\an1`
     pattern = re.compile(r'\d{1,4}\r\n(\d{1,2}:\d{1,2}:\d{1,2}\.\d{1,3}) ?--> ?(\d{1,2}:\d{1,2}:\d{1,2}\.\d{1,3})\r\n(\\an\d)')
     tmp = pattern.sub(r'Dialogue: 0,\1,\2,注释,,0,0,0,,{\3\\fad(500,500)\\fs20}', tmp)
+
+    # match dialogue: `双行`
     pattern = re.compile(r'\d{1,4}\r\n(\d{1,2}:\d{1,2}:\d{1,2}\.\d{1,3}) ?--> ?(\d{1,2}:\d{1,2}:\d{1,2}\.\d{1,3})\r\n(.+)\r\n([ !\w\.,?\'\"-:;\(\)%$@&*\^+~<>]+)\r\n')
     tmp = pattern.sub(r'Dialogue: 0,\1,\2,Default,,0,0,0,,\3\\N{\\rEN}\4', tmp)
+
+    # match dialogue: `单行`
     pattern = re.compile(r'\d{1,4}\r\n(\d{1,2}:\d{1,2}:\d{1,2}\.\d{1,3}) ?--> ?(\d{1,2}:\d{1,2}:\d{1,2}\.\d{1,3})\r\n(.+)\r\n\r\n')
     tmp = pattern.sub(r'Dialogue: 0,\1,\2,Default,,0,0,0,,\3\n', tmp)
+
+    # match timestamp: `00:00:06,000` -> 00:00:06.00
     pattern = re.compile(r'(\d{1,2}:\d{1,2}:\d{1,2}\.\d{2})\d')
     tmp = pattern.sub(r'\1', tmp)
+
     pattern = re.compile(r'\n')
     tmp = pattern.sub(r'\r\n', tmp)
     pattern = re.compile(r'\r\r\n')
     tmp = pattern.sub(r'\r\n', tmp)
+
+    # remove blank dialogue
     pattern = re.compile(r'\d{1,4}\r\n(\d{1,2}:\d{1,2}:\d{1,2}\.\d{1,3}) ?--> ?(\d{1,2}:\d{1,2}:\d{1,2}\.\d{1,3})\r\n\r\n\r\n')
     tmp = pattern.sub(r'', tmp)
-    pattern = re.compile(r'\d{1,4}\r\n(\d{1,2}:\d{1,2}:\d{1,2}\.\d{1,3}) ?--> ?(\d{1,2}:\d{1,2}:\d{1,2}\.\d{1,3})\r\n(.+)\r\n(.+)\r\n')
+
+    # match song: ``
+    pattern = re.compile(r'\d{1,4}\r\n(\d{1,2}:\d{1,2}:\d{1,2}\.\d{1,3}) ?--> ?(\d{1,2}:\d{1,2}:\d{1,2}\.\d{1,3})\r\n(.*♪.*♪.*)\r\n(.*♪.*♪.*)\r\n')
     tmp = pattern.sub(r'Dialogue: 0,\1,\2,歌词,,0,0,0,,\3\\N\4', tmp)
-    tmp = tmp.replace('\r\n', '\\N')
-    tmp = re.sub(r'(\\N){1,8}', r'\\N', tmp)
-    tmp = re.sub(r'(\\N){1,8}$', '', tmp)
-    tmp = tmp.replace('\\NDialogue:', '\r\nDialogue:')
+    pattern = re.compile(r'\d{1,4}\r\n(\d{1,2}:\d{1,2}:\d{1,2}\.\d{1,3}) ?--> ?(\d{1,2}:\d{1,2}:\d{1,2}\.\d{1,3})\r\n(.+)\r\n(.+)\r\n')
+    tmp = pattern.sub(r'Dialogue: 0,\1,\2,Default,,0,0,0,,\3\\N\4', tmp)
+
+#    tmp = tmp.replace('\r\n', '\\N')
+#    tmp = re.sub(r'(\\N){1,8}', r'\\N', tmp)
+#    tmp = re.sub(r'(\\N){1,8}$', '', tmp)
+#    tmp = tmp.replace('\\NDialogue:', '\r\nDialogue:')
 
     output_str = head_str + '\n' + tmp
     # print output_str.decode('utf-8')
