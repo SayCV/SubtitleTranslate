@@ -75,6 +75,17 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
     tmp = pattern.sub(r'Dialogue: 0,\1,\2,注释,,0,0,0,,{\3\\fad(500,500)\\fs20}', tmp)
 
     # match dialogue: `双行`
+    pattern = re.compile(r'\d{1,4}\r\n(\d{1,2}:\d{1,2}:\d{1,2}\.\d{1,3}) ?--> ?(\d{1,2}:\d{1,2}:\d{1,2}\.\d{1,3})\r\n(.{35,})\r\n([ !\w\.,?\'\"-:;\(\)%$@&*\^+~<>]+)\r\n')
+    tmp = pattern.sub(r'Dialogue: 0,\1,\2,Default,,0,0,0,,{\\fs12}\3\\N{\\rEN}\4 ', tmp)
+    pattern = re.compile(r'\d{1,4}\r\n(\d{1,2}:\d{1,2}:\d{1,2}\.\d{1,3}) ?--> ?(\d{1,2}:\d{1,2}:\d{1,2}\.\d{1,3})\r\n(.{30,})\r\n([ !\w\.,?\'\"-:;\(\)%$@&*\^+~<>]+)\r\n')
+    tmp = pattern.sub(r'Dialogue: 0,\1,\2,Default,,0,0,0,,{\\fs14}\3\\N{\\rEN}\4 ', tmp)
+    pattern = re.compile(r'\d{1,4}\r\n(\d{1,2}:\d{1,2}:\d{1,2}\.\d{1,3}) ?--> ?(\d{1,2}:\d{1,2}:\d{1,2}\.\d{1,3})\r\n(.{27,})\r\n([ !\w\.,?\'\"-:;\(\)%$@&*\^+~<>]+)\r\n')
+    tmp = pattern.sub(r'Dialogue: 0,\1,\2,Default,,0,0,0,,{\\fs16}\3\\N{\\rEN}\4 ', tmp)
+    pattern = re.compile(r'\d{1,4}\r\n(\d{1,2}:\d{1,2}:\d{1,2}\.\d{1,3}) ?--> ?(\d{1,2}:\d{1,2}:\d{1,2}\.\d{1,3})\r\n(.{25,})\r\n([ !\w\.,?\'\"-:;\(\)%$@&*\^+~<>]+)\r\n')
+    tmp = pattern.sub(r'Dialogue: 0,\1,\2,Default,,0,0,0,,{\\fs18}\3\\N{\\rEN}\4 ', tmp)
+    pattern = re.compile(r'\d{1,4}\r\n(\d{1,2}:\d{1,2}:\d{1,2}\.\d{1,3}) ?--> ?(\d{1,2}:\d{1,2}:\d{1,2}\.\d{1,3})\r\n(.{22,})\r\n([ !\w\.,?\'\"-:;\(\)%$@&*\^+~<>]+)\r\n')
+    tmp = pattern.sub(r'Dialogue: 0,\1,\2,Default,,0,0,0,,{\\fs20}\3\\N{\\rEN}\4 ', tmp)
+
     pattern = re.compile(r'\d{1,4}\r\n(\d{1,2}:\d{1,2}:\d{1,2}\.\d{1,3}) ?--> ?(\d{1,2}:\d{1,2}:\d{1,2}\.\d{1,3})\r\n(.+)\r\n([ !\w\.,?\'\"-:;\(\)%$@&*\^+~<>]+)\r\n')
     tmp = pattern.sub(r'Dialogue: 0,\1,\2,Default,,0,0,0,,\3\\N{\\rEN}\4 ', tmp)
 
