@@ -9,7 +9,7 @@ from urllib import parse
 import time
 from random import randrange
 
-from utils_lang import abbreviate_language
+from utils_lang import abbreviate_language, TranslationError
 
 class Deepl_Translator:
     API_URL = "https://www2.deepl.com/jsonrpc"
@@ -114,6 +114,9 @@ class Deepl_Translator:
         }
 
     def extract_translated_sentences(json_response):
+        if 'result' not in json_response:
+            raise TranslationError('DeepL call resulted in a unknown result.')
+
         translations = json_response["result"]["translations"]
         translated_sentences = [
             translation["beams"][0]["postprocessed_sentence"]
@@ -122,12 +125,19 @@ class Deepl_Translator:
         return translated_sentences
 
     def extract_split_sentences(json_response):
+        if 'result' not in json_response:
+            raise TranslationError('DeepL call resulted in a unknown result.')
+
         return json_response["result"]["splitted_texts"][0]
 
     def split_into_sentences(self, text, **kwargs):
         data = Deepl_Translator.generate_split_sentences_request_data(text, **kwargs)
+        
+        time.sleep(int(1))
         response = requests.post(Deepl_Translator.API_URL, data=json.dumps(data), headers=self.headers)
-        response.raise_for_status()
+        if response.status_code == 429:
+            time.sleep(int(1))
+            response.raise_for_status()
 
         json_response = response.json()
         sentences = Deepl_Translator.extract_split_sentences(json_response)
@@ -149,9 +159,9 @@ class Deepl_Translator:
 
         time.sleep(int(1))
         response = self.request_translation(source_language, target_language, text)
-        #response.raise_for_status()
         if response.status_code == 429:
-            time.sleep(int(10))
+            time.sleep(int(1))
+            response.raise_for_status()
 
         json_response = response.json()
         translated_sentences = Deepl_Translator.extract_translated_sentences(json_response)

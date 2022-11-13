@@ -40,3 +40,7 @@ def abbreviate_language(language):
     language = language.lower()
     abbreviations = create_abbreviations_dictionary()
     return abbreviations.get(language.lower())
+
+class TranslationError(Exception):
+    def __init__(self, message):
+        super(TranslationError, self).__init__(message)
