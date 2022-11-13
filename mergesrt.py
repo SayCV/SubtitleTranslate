@@ -86,7 +86,7 @@ class Timestamp:
 
     _inf = None
 
-    regexp = ur"\d\d:\d\d:\d\d,\d\d\d"
+    regexp = r"\d\d:\d\d:\d\d,\d\d\d"
 
     @classmethod
     def inf(cls):
@@ -96,7 +96,7 @@ class Timestamp:
 
     @classmethod
     def parse(cls, _str):
-        matcher = re.compile(ur"^(\d\d):(\d\d):(\d\d),(\d\d\d)$").match(_str)
+        matcher = re.compile(r"^(\d\d):(\d\d):(\d\d),(\d\d\d)$").match(_str)
         if not matcher:
             raise Exception("Not timestamp format [%s], should not call me." % (_str))
         (hour, minute, sec, msec) = matcher.groups()
@@ -127,6 +127,31 @@ class Timestamp:
         if b is None:
             raise Exception("comparing with None")
         return self.to_msec() - b.to_msec()
+
+    def __eq__(self, b):
+        if not isinstance(b, Timestamp):
+            raise Exception("comparing with None")
+        return self.to_msec() == b.to_msec()
+
+    def __lt__(self, b):
+        if not isinstance(b, Timestamp):
+            raise Exception("comparing with None")
+        return self.to_msec() < b.to_msec()
+
+    def __gt__(self, b):
+        if not isinstance(b, Timestamp):
+            raise Exception("comparing with None")
+        return self.to_msec() > b.to_msec()
+
+    def __le__(self, b):
+        if not isinstance(b, Timestamp):
+            raise Exception("comparing with None")
+        return self.to_msec() <= b.to_msec()
+
+    def __ge__(self, b):
+        if not isinstance(b, Timestamp):
+            raise Exception("comparing with None")
+        return self.to_msec() >= b.to_msec()
 
     def __sub__(self, b):
         return self.to_msec() - b.to_msec()
@@ -281,12 +306,12 @@ class SRT:
         line = self.readline_until_nonempty()
         if line is None:
             return None
-        if re.compile(ur"^\d+$").match(line):
+        if re.compile(r"^\d+$").match(line):
             return int(line)
         else:
             raise Exception("Expect number but I got %s %s:L%d" % (repr(line), self.filename, self.lineno))
 
-    def next(self, current_time):
+    def next(self, current_time: Timestamp):
         if self.subno is None:
             self.current = None
             return
@@ -299,7 +324,7 @@ class SRT:
         if line is None:
             raise Exception("The number is expected but the timestamps fail before EOF")
         line = line.strip()
-        regexp = re.compile(ur"^(?P<start>%s) --> (?P<end>%s)$" % (Timestamp.regexp, Timestamp.regexp))
+        regexp = re.compile(r"^(?P<start>%s) --> (?P<end>%s)$" % (Timestamp.regexp, Timestamp.regexp))
         matcher = regexp.match(line)
         if not matcher:
             raise Exception("Expect start --> end, but I got %s %s:L%d" % (repr(line), self.filename, self.lineno))
