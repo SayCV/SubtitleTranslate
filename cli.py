@@ -58,7 +58,7 @@ def run_translate():
     parser.add_argument(
         '--engine',
         dest='engine',
-        default='baidu',
+        default='deepl',
         help='Define the trans engine: baidu, google, bing')
     parser.add_argument(
         '--model',
@@ -103,11 +103,6 @@ def run_translate():
     output_file = args.output
     src_lang = args.src
     dst_lang = args.dst
-
-    if src_lang == 'eng':
-        src_lang = 'en'
-    if dst_lang == 'chs':
-        dst_lang = 'zh-CN'
 
     translate_and_compose(input_file, output_file, output_file2, src_lang,
                           dst_lang, engine=args.engine, encoding=args.encoding, mode=args.model, both=args.both)

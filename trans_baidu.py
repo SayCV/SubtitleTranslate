@@ -79,8 +79,12 @@ class Baidu_Translator:
         return result
 
     def translate(self, text, src_lang, target_lang) -> str:
-        if target_lang == 'zh-CN':
-            target_lang = 'zh'
+
+        if src_lang == 'eng':
+            src_lang = 'en'
+        if dst_lang == 'chs':
+            dst_lang = 'zh'
+
         query = text
         token, gtk, lang = self.get_params(query)
         sign, acs_token = self.get_sign_and_token(query, gtk, src_lang)

@@ -7,7 +7,7 @@ import json
 import time
 
 from trans_baidu import Baidu_Translator
-
+from trans_deepl import Deepl_Translator
 
 class TkGenerator:
     """
@@ -77,6 +77,12 @@ class Google_Translator:
         return response.read().decode('utf-8')
 
     def translate(self, text, src_lang, target_lang) -> list:
+
+        if src_lang == 'eng':
+            src_lang = 'en'
+        if dst_lang == 'chs':
+            dst_lang = 'zh-CN'
+
         tk = self.tk_gen.get_tk(text)
         url = "http://translate.google.hk/translate_a/single?client=t" \
               "&sl=%s&tl=%s&dt=at&dt=bd&dt=ex&dt=ld&dt=md&dt=qca" \
@@ -101,6 +107,8 @@ class Translator:
             _tool = Google_Translator()
         elif self.engine == 'baidu':
             _tool = Baidu_Translator()
+        elif self.engine == 'deepl':
+            _tool = Deepl_Translator()
         elif self.engine == 'bing':
             _tool = Bing_Translator()
         return _tool.translate(text, src_lang, target_lang)
