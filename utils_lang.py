@@ -1,10 +1,12 @@
 
 SUPPORTED_LANGUAGES = [
     {"code": "BG", "language": "Bulgarian"},
+    {"code": "ZH", "language": "Chinese"},
     {"code": "ZH", "language": "chs"},
     {"code": "CS", "language": "Czech"},
     {"code": "DA", "language": "Danish"},
     {"code": "NL", "language": "Dutch"},
+    {"code": "EN", "language": "English"},
     {"code": "EN", "language": "eng"},
     {"code": "ET", "language": "Estonian"},
     {"code": "FI", "language": "Finnish"},
@@ -36,10 +38,13 @@ def create_abbreviations_dictionary(languages=SUPPORTED_LANGUAGES):
     return {**short_dict, **verbose_dict}
 
 
-def abbreviate_language(language):
+def abbreviate_language(language, engine = 'baidu'):
     language = language.lower()
     abbreviations = create_abbreviations_dictionary()
-    return abbreviations.get(language.lower())
+    if engine == 'baidu':
+        return abbreviations.get(language.lower()).lower()
+    else:
+        return abbreviations.get(language.lower())
 
 class TranslationError(Exception):
     def __init__(self, message):

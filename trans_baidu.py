@@ -13,6 +13,7 @@ import execjs
 import requests
 from urllib import parse
 
+from utils_lang import abbreviate_language, TranslationError
 
 class Baidu_Translator:
     def __init__(self):
@@ -60,10 +61,10 @@ class Baidu_Translator:
         return sign, acs_token
 
 
-    def get_result(self, query, src_lang, target_lang, sign, token, acs_token):
+    def get_result(self, query, source_language, target_language, sign, token, acs_token):
         data = {
-            'from': src_lang,
-            'to': target_lang,
+            'from': source_language,
+            'to': target_language,
             'query': query,
             'transtype': 'realtime',
             'simple_means_flag': '3',
@@ -78,26 +79,28 @@ class Baidu_Translator:
         result = _data_lines
         return result
 
-    def translate(self, text, src_lang, target_lang) -> str:
-
-        if src_lang == 'eng':
-            src_lang = 'en'
-        if dst_lang == 'chs':
-            dst_lang = 'zh'
+    def translate(self, text, src_lang, dst_lang) -> str:
+        source_language = abbreviate_language(src_lang, engine = 'baidu')
+        target_language = abbreviate_language(dst_lang, engine = 'baidu')
 
         query = text
         token, gtk, lang = self.get_params(query)
-        sign, acs_token = self.get_sign_and_token(query, gtk, src_lang)
-        result = self.get_result(query, src_lang, target_lang, sign, token, acs_token)
+        sign, acs_token = self.get_sign_and_token(query, gtk, source_language)
+        result = self.get_result(query, source_language, target_language, sign, token, acs_token)
         return result
 
 
 def main():
     trans = Baidu_Translator()
     query = 'power'
+    src_lang = 'eng'
+    dst_lang = 'chs'
+    source_language = abbreviate_language(src_lang, engine = 'baidu')
+    target_language = abbreviate_language(dst_lang, engine = 'baidu')
+
     token, gtk, lang = trans.get_params(query)
-    sign, acs_token = trans.get_sign_and_token(query, gtk, lang)
-    result = trans.get_result(query, lang, 'zh', sign, token, acs_token)
+    sign, acs_token = trans.get_sign_and_token(query, gtk, source_language)
+    result = trans.get_result(query, source_language, target_language, sign, token, acs_token)
     print('翻译成中文的结果为：', result)
 
 
