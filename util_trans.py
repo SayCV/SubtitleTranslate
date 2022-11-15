@@ -10,6 +10,8 @@ from trans_bing  import Bing_Translator
 from trans_baidu import Baidu_Translator
 from trans_deepl import Deepl_Translator
 from trans_sogou import Sogou_Translator
+from trans_more import Youdao_Translator, TranslateCom_Translator
+
 
 class TkGenerator:
     """
@@ -117,6 +119,8 @@ class Translator:
             _tool = Bing_Translator()
         elif self.engine == 'sogou':
             _tool = Sogou_Translator()
+        elif self.engine == 'youdao':
+            _tool = Youdao_Translator()
         return _tool.translate(text, src_lang, target_lang)
 
     def translate_raw(self, text: str, src_lang: str, target_lang: str) -> str:
