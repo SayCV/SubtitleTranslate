@@ -6,8 +6,10 @@ import urllib.error
 import json
 import time
 
+from trans_bing  import Bing_Translator
 from trans_baidu import Baidu_Translator
 from trans_deepl import Deepl_Translator
+from trans_sogou import Sogou_Translator
 
 class TkGenerator:
     """
@@ -101,6 +103,8 @@ class Translator:
     def __init__(self, engine):
         self.engine = engine
         self.max_limited = 3500
+        if self.engine == 'bing':
+            self.max_limited = 900
 
     def __translate(self, text, src_lang, target_lang) -> str:
         if self.engine == 'google':
@@ -111,6 +115,8 @@ class Translator:
             _tool = Deepl_Translator()
         elif self.engine == 'bing':
             _tool = Bing_Translator()
+        elif self.engine == 'sogou':
+            _tool = Sogou_Translator()
         return _tool.translate(text, src_lang, target_lang)
 
     def translate_raw(self, text: str, src_lang: str, target_lang: str) -> str:
