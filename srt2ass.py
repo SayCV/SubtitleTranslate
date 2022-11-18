@@ -93,6 +93,10 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
     tmp = pattern.sub(r'Dialogue: 0,\1,\2,Default,,0,0,0,,{\\fs18}\3\\N{\\rEN}\4 ', tmp)
     pattern = re.compile(r'\d{1,4}\r\n(\d{1,2}:\d{1,2}:\d{1,2}\.\d{1,3}) ?--> ?(\d{1,2}:\d{1,2}:\d{1,2}\.\d{1,3})\r\n(.{24,})\r\n([ !\w\.,?\'\"-:;\(\)%$@&*\^+~<>]+)\r\n')
     tmp = pattern.sub(r'Dialogue: 0,\1,\2,Default,,0,0,0,,{\\fs20}\3\\N{\\rEN}\4 ', tmp)
+    pattern = re.compile(r'\d{1,4}\r\n(\d{1,2}:\d{1,2}:\d{1,2}\.\d{1,3}) ?--> ?(\d{1,2}:\d{1,2}:\d{1,2}\.\d{1,3})\r\n(.{22,})\r\n([ !\w\.,?\'\"-:;\(\)%$@&*\^+~<>]+)\r\n')
+    tmp = pattern.sub(r'Dialogue: 0,\1,\2,Default,,0,0,0,,{\\fs22}\3\\N{\\rEN}\4 ', tmp)
+    pattern = re.compile(r'\d{1,4}\r\n(\d{1,2}:\d{1,2}:\d{1,2}\.\d{1,3}) ?--> ?(\d{1,2}:\d{1,2}:\d{1,2}\.\d{1,3})\r\n(.{20,})\r\n([ !\w\.,?\'\"-:;\(\)%$@&*\^+~<>]+)\r\n')
+    tmp = pattern.sub(r'Dialogue: 0,\1,\2,Default,,0,0,0,,{\\fs24}\3\\N{\\rEN}\4 ', tmp)
 
     pattern = re.compile(r'\d{1,4}\r\n(\d{1,2}:\d{1,2}:\d{1,2}\.\d{1,3}) ?--> ?(\d{1,2}:\d{1,2}:\d{1,2}\.\d{1,3})\r\n(.+)\r\n([ !\w\.,?\'\"-:;\(\)%$@&*\^+~<>]+)\r\n')
     tmp = pattern.sub(r'Dialogue: 0,\1,\2,Default,,0,0,0,,\3\\N{\\rEN}\4 ', tmp)
