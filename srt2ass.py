@@ -74,33 +74,33 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
     tmp = pattern.sub(r'Dialogue: 0,\1,\2,注释,,0,0,0,,{\3\\fad(500,500)\\fs20}', tmp)
 
     # match dialogue: `双行`
-    pattern = re.compile(r'\d{1,4}\r\n(\d{1,2}:\d{1,2}:\d{1,2}\.\d{1,3}) ?--> ?(\d{1,2}:\d{1,2}:\d{1,2}\.\d{1,3})\r\n(.{42,})\r\n([ …!\w\.,?\'\"-:;\[\]\(\)%$@&*\^+~<>]+)\r\n')
-    tmp = pattern.sub(r'Dialogue: 0,\1,\2,Default,,0,0,0,,{\\fs08}\3\\N{\\rEN}\4 ', tmp)
-    pattern = re.compile(r'\d{1,4}\r\n(\d{1,2}:\d{1,2}:\d{1,2}\.\d{1,3}) ?--> ?(\d{1,2}:\d{1,2}:\d{1,2}\.\d{1,3})\r\n(.{40,})\r\n([ …!\w\.,?\'\"-:;\[\]\(\)%$@&*\^+~<>]+)\r\n')
-    tmp = pattern.sub(r'Dialogue: 0,\1,\2,Default,,0,0,0,,{\\fs10}\3\\N{\\rEN}\4 ', tmp)
-    pattern = re.compile(r'\d{1,4}\r\n(\d{1,2}:\d{1,2}:\d{1,2}\.\d{1,3}) ?--> ?(\d{1,2}:\d{1,2}:\d{1,2}\.\d{1,3})\r\n(.{38,})\r\n([ …!\w\.,?\'\"-:;\[\]\(\)%$@&*\^+~<>]+)\r\n')
-    tmp = pattern.sub(r'Dialogue: 0,\1,\2,Default,,0,0,0,,{\\fs11}\3\\N{\\rEN}\4 ', tmp)
-    pattern = re.compile(r'\d{1,4}\r\n(\d{1,2}:\d{1,2}:\d{1,2}\.\d{1,3}) ?--> ?(\d{1,2}:\d{1,2}:\d{1,2}\.\d{1,3})\r\n(.{36,})\r\n([ …!\w\.,?\'\"-:;\[\]\(\)%$@&*\^+~<>]+)\r\n')
-    tmp = pattern.sub(r'Dialogue: 0,\1,\2,Default,,0,0,0,,{\\fs12}\3\\N{\\rEN}\4 ', tmp)
-    pattern = re.compile(r'\d{1,4}\r\n(\d{1,2}:\d{1,2}:\d{1,2}\.\d{1,3}) ?--> ?(\d{1,2}:\d{1,2}:\d{1,2}\.\d{1,3})\r\n(.{34,})\r\n([ …!\w\.,?\'\"-:;\[\]\(\)%$@&*\^+~<>]+)\r\n')
-    tmp = pattern.sub(r'Dialogue: 0,\1,\2,Default,,0,0,0,,{\\fs13}\3\\N{\\rEN}\4 ', tmp)
-    pattern = re.compile(r'\d{1,4}\r\n(\d{1,2}:\d{1,2}:\d{1,2}\.\d{1,3}) ?--> ?(\d{1,2}:\d{1,2}:\d{1,2}\.\d{1,3})\r\n(.{32,})\r\n([ …!\w\.,?\'\"-:;\[\]\(\)%$@&*\^+~<>]+)\r\n')
-    tmp = pattern.sub(r'Dialogue: 0,\1,\2,Default,,0,0,0,,{\\fs14}\3\\N{\\rEN}\4 ', tmp)
-    pattern = re.compile(r'\d{1,4}\r\n(\d{1,2}:\d{1,2}:\d{1,2}\.\d{1,3}) ?--> ?(\d{1,2}:\d{1,2}:\d{1,2}\.\d{1,3})\r\n(.{30,})\r\n([ …!\w\.,?\'\"-:;\[\]\(\)%$@&*\^+~<>]+)\r\n')
-    tmp = pattern.sub(r'Dialogue: 0,\1,\2,Default,,0,0,0,,{\\fs15}\3\\N{\\rEN}\4 ', tmp)
-    pattern = re.compile(r'\d{1,4}\r\n(\d{1,2}:\d{1,2}:\d{1,2}\.\d{1,3}) ?--> ?(\d{1,2}:\d{1,2}:\d{1,2}\.\d{1,3})\r\n(.{28,})\r\n([ …!\w\.,?\'\"-:;\[\]\(\)%$@&*\^+~<>]+)\r\n')
-    tmp = pattern.sub(r'Dialogue: 0,\1,\2,Default,,0,0,0,,{\\fs16}\3\\N{\\rEN}\4 ', tmp)
-    pattern = re.compile(r'\d{1,4}\r\n(\d{1,2}:\d{1,2}:\d{1,2}\.\d{1,3}) ?--> ?(\d{1,2}:\d{1,2}:\d{1,2}\.\d{1,3})\r\n(.{26,})\r\n([ …!\w\.,?\'\"-:;\[\]\(\)%$@&*\^+~<>]+)\r\n')
-    tmp = pattern.sub(r'Dialogue: 0,\1,\2,Default,,0,0,0,,{\\fs18}\3\\N{\\rEN}\4 ', tmp)
-    pattern = re.compile(r'\d{1,4}\r\n(\d{1,2}:\d{1,2}:\d{1,2}\.\d{1,3}) ?--> ?(\d{1,2}:\d{1,2}:\d{1,2}\.\d{1,3})\r\n(.{24,})\r\n([ …!\w\.,?\'\"-:;\[\]\(\)%$@&*\^+~<>]+)\r\n')
-    tmp = pattern.sub(r'Dialogue: 0,\1,\2,Default,,0,0,0,,{\\fs20}\3\\N{\\rEN}\4 ', tmp)
-    pattern = re.compile(r'\d{1,4}\r\n(\d{1,2}:\d{1,2}:\d{1,2}\.\d{1,3}) ?--> ?(\d{1,2}:\d{1,2}:\d{1,2}\.\d{1,3})\r\n(.{22,})\r\n([ …!\w\.,?\'\"-:;\[\]\(\)%$@&*\^+~<>]+)\r\n')
-    tmp = pattern.sub(r'Dialogue: 0,\1,\2,Default,,0,0,0,,{\\fs22}\3\\N{\\rEN}\4 ', tmp)
-    pattern = re.compile(r'\d{1,4}\r\n(\d{1,2}:\d{1,2}:\d{1,2}\.\d{1,3}) ?--> ?(\d{1,2}:\d{1,2}:\d{1,2}\.\d{1,3})\r\n(.{20,})\r\n([ …!\w\.,?\'\"-:;\[\]\(\)%$@&*\^+~<>]+)\r\n')
-    tmp = pattern.sub(r'Dialogue: 0,\1,\2,Default,,0,0,0,,{\\fs24}\3\\N{\\rEN}\4 ', tmp)
+    ## pattern = re.compile(r'\d{1,4}\r\n(\d{1,2}:\d{1,2}:\d{1,2}\.\d{1,3}) ?--> ?(\d{1,2}:\d{1,2}:\d{1,2}\.\d{1,3})\r\n(.{42,})\r\n([ …!\w\.,?\'\"-:;\[\]\(\)%$@&*\^+~<>]+)\r\n')
+    ## tmp = pattern.sub(r'Dialogue: 0,\1,\2,Default,,0,0,0,,{\\fs08}\3\\N{\\rEN}\4 ', tmp)
+    ## pattern = re.compile(r'\d{1,4}\r\n(\d{1,2}:\d{1,2}:\d{1,2}\.\d{1,3}) ?--> ?(\d{1,2}:\d{1,2}:\d{1,2}\.\d{1,3})\r\n(.{40,})\r\n([ …!\w\.,?\'\"-:;\[\]\(\)%$@&*\^+~<>]+)\r\n')
+    ## tmp = pattern.sub(r'Dialogue: 0,\1,\2,Default,,0,0,0,,{\\fs10}\3\\N{\\rEN}\4 ', tmp)
+    ## pattern = re.compile(r'\d{1,4}\r\n(\d{1,2}:\d{1,2}:\d{1,2}\.\d{1,3}) ?--> ?(\d{1,2}:\d{1,2}:\d{1,2}\.\d{1,3})\r\n(.{38,})\r\n([ …!\w\.,?\'\"-:;\[\]\(\)%$@&*\^+~<>]+)\r\n')
+    ## tmp = pattern.sub(r'Dialogue: 0,\1,\2,Default,,0,0,0,,{\\fs11}\3\\N{\\rEN}\4 ', tmp)
+    ## pattern = re.compile(r'\d{1,4}\r\n(\d{1,2}:\d{1,2}:\d{1,2}\.\d{1,3}) ?--> ?(\d{1,2}:\d{1,2}:\d{1,2}\.\d{1,3})\r\n(.{36,})\r\n([ …!\w\.,?\'\"-:;\[\]\(\)%$@&*\^+~<>]+)\r\n')
+    ## tmp = pattern.sub(r'Dialogue: 0,\1,\2,Default,,0,0,0,,{\\fs12}\3\\N{\\rEN}\4 ', tmp)
+    ## pattern = re.compile(r'\d{1,4}\r\n(\d{1,2}:\d{1,2}:\d{1,2}\.\d{1,3}) ?--> ?(\d{1,2}:\d{1,2}:\d{1,2}\.\d{1,3})\r\n(.{34,})\r\n([ …!\w\.,?\'\"-:;\[\]\(\)%$@&*\^+~<>]+)\r\n')
+    ## tmp = pattern.sub(r'Dialogue: 0,\1,\2,Default,,0,0,0,,{\\fs13}\3\\N{\\rEN}\4 ', tmp)
+    ## pattern = re.compile(r'\d{1,4}\r\n(\d{1,2}:\d{1,2}:\d{1,2}\.\d{1,3}) ?--> ?(\d{1,2}:\d{1,2}:\d{1,2}\.\d{1,3})\r\n(.{32,})\r\n([ …!\w\.,?\'\"-:;\[\]\(\)%$@&*\^+~<>]+)\r\n')
+    ## tmp = pattern.sub(r'Dialogue: 0,\1,\2,Default,,0,0,0,,{\\fs14}\3\\N{\\rEN}\4 ', tmp)
+    ## pattern = re.compile(r'\d{1,4}\r\n(\d{1,2}:\d{1,2}:\d{1,2}\.\d{1,3}) ?--> ?(\d{1,2}:\d{1,2}:\d{1,2}\.\d{1,3})\r\n(.{30,})\r\n([ …!\w\.,?\'\"-:;\[\]\(\)%$@&*\^+~<>]+)\r\n')
+    ## tmp = pattern.sub(r'Dialogue: 0,\1,\2,Default,,0,0,0,,{\\fs15}\3\\N{\\rEN}\4 ', tmp)
+    ## pattern = re.compile(r'\d{1,4}\r\n(\d{1,2}:\d{1,2}:\d{1,2}\.\d{1,3}) ?--> ?(\d{1,2}:\d{1,2}:\d{1,2}\.\d{1,3})\r\n(.{28,})\r\n([ …!\w\.,?\'\"-:;\[\]\(\)%$@&*\^+~<>]+)\r\n')
+    ## tmp = pattern.sub(r'Dialogue: 0,\1,\2,Default,,0,0,0,,{\\fs16}\3\\N{\\rEN}\4 ', tmp)
+    ## pattern = re.compile(r'\d{1,4}\r\n(\d{1,2}:\d{1,2}:\d{1,2}\.\d{1,3}) ?--> ?(\d{1,2}:\d{1,2}:\d{1,2}\.\d{1,3})\r\n(.{26,})\r\n([ …!\w\.,?\'\"-:;\[\]\(\)%$@&*\^+~<>]+)\r\n')
+    ## tmp = pattern.sub(r'Dialogue: 0,\1,\2,Default,,0,0,0,,{\\fs18}\3\\N{\\rEN}\4 ', tmp)
+    ## pattern = re.compile(r'\d{1,4}\r\n(\d{1,2}:\d{1,2}:\d{1,2}\.\d{1,3}) ?--> ?(\d{1,2}:\d{1,2}:\d{1,2}\.\d{1,3})\r\n(.{24,})\r\n([ …!\w\.,?\'\"-:;\[\]\(\)%$@&*\^+~<>]+)\r\n')
+    ## tmp = pattern.sub(r'Dialogue: 0,\1,\2,Default,,0,0,0,,{\\fs20}\3\\N{\\rEN}\4 ', tmp)
+    ## pattern = re.compile(r'\d{1,4}\r\n(\d{1,2}:\d{1,2}:\d{1,2}\.\d{1,3}) ?--> ?(\d{1,2}:\d{1,2}:\d{1,2}\.\d{1,3})\r\n(.{22,})\r\n([ …!\w\.,?\'\"-:;\[\]\(\)%$@&*\^+~<>]+)\r\n')
+    ## tmp = pattern.sub(r'Dialogue: 0,\1,\2,Default,,0,0,0,,{\\fs22}\3\\N{\\rEN}\4 ', tmp)
+    ## pattern = re.compile(r'\d{1,4}\r\n(\d{1,2}:\d{1,2}:\d{1,2}\.\d{1,3}) ?--> ?(\d{1,2}:\d{1,2}:\d{1,2}\.\d{1,3})\r\n(.{20,})\r\n([ …!\w\.,?\'\"-:;\[\]\(\)%$@&*\^+~<>]+)\r\n')
+    ## tmp = pattern.sub(r'Dialogue: 0,\1,\2,Default,,0,0,0,,{\\fs24}\3\\N{\\rEN}\4 ', tmp)
 
     pattern = re.compile(r'\d{1,4}\r\n(\d{1,2}:\d{1,2}:\d{1,2}\.\d{1,3}) ?--> ?(\d{1,2}:\d{1,2}:\d{1,2}\.\d{1,3})\r\n(.+)\r\n([ …!\w\.,?\'\"-:;\[\]\(\)%$@&*\^+~<>]+)\r\n')
-    tmp = pattern.sub(r'Dialogue: 0,\1,\2,Default,,0,0,0,,\3\\N{\\rEN}\4 ', tmp)
+    tmp = pattern.sub(lambda x: auto_counts_sub(x), tmp)
 
     # match dialogue: `单行`
     pattern = re.compile(r'\d{1,4}\r\n(\d{1,2}:\d{1,2}:\d{1,2}\.\d{1,3}) ?--> ?(\d{1,2}:\d{1,2}:\d{1,2}\.\d{1,3})\r\n(.+)\r\n\r\n')
@@ -139,6 +139,27 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
         output.write(codecs.BOM_UTF8)
         output.write(output_str.encode('utf-8'))
 
+def auto_counts_sub(value):
+    str1 = value.group(1)
+    str2 = value.group(2)
+    str3 = value.group(3)
+    str4 = value.group(4)
+    #print(3, value.group(3), len(value.group(3).encode('utf-8')))
+    #print(3, value.group(3), len(value.group(3)))
+    str3_size = 0
+    str3_len = len(str3.encode('utf-8'))
+    ret = ''
+    if str3_len >= 3*30:
+        gap: int = (str3_len/3 - 30)/2
+        str3_size = 15 - 1*gap
+        ret = r'Dialogue: 0,%s,%s,Default,,0,0,0,,{\fs%d}%s\N{\rEN}%s ' % (str1, str2, str3_size, str3, str4)
+    elif str3_len >= 3*20:
+        gap: int = (str3_len/3 - 21)/2
+        str3_size = 24 - 2*gap
+        ret = r'Dialogue: 0,%s,%s,Default,,0,0,0,,{\fs%d}%s\N{\rEN}%s ' % (str1, str2, str3_size, str3, str4)
+    else:
+        ret = r'Dialogue: 0,%s,%s,Default,,0,0,0,,%s\N{\rEN}%s ' % (str1, str2, str3, str4)
+    return ret
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
