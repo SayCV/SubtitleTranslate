@@ -149,9 +149,9 @@ def auto_counts_sub(value):
     str3_size = 0
     str3_len = len(str3.encode('utf-8'))
     ret = ''
-    if str3_len >= 3*30:
-        gap: int = (str3_len/3 - 30)/2
-        str3_size = 15 - 1*gap
+    if str3_len >= 3*28:
+        gap: int = (str3_len/3 - 28)/3
+        str3_size = 18 - 1*gap
         ret = r'Dialogue: 0,%s,%s,Default,,0,0,0,,{\fs%d}%s\N{\rEN}%s ' % (str1, str2, str3_size, str3, str4)
     elif str3_len >= 3*20:
         gap: int = (str3_len/3 - 21)/2
