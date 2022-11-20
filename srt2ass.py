@@ -40,7 +40,8 @@ Style: Default,sarasa-mono,26,&H00FFFFFF,&H00000000,&H00000000,&H00FF8000,0,0,0,
 Style: EN,DejaVu Sans Mono,16,&H006CB5DE,&HF0000000,&H80000000,&H00934A21,0,0,0,0,100,100,0,0.00,1,2,1,2,5,5,6,134
 Style: 注释,微软雅黑,18,&H00FFFFFF,&HFF000000,&H00000000,&H00000000,0,0,0,0,100,100,0,0,1,0,0.5,8,0,0,5,1
 Style: 特效,微软雅黑,20,&H00FFFFFF,&HFF000000,&H00000000,&H00000000,0,0,0,0,100,100,0,0,1,0,0,2,5,5,5,1
-Style: 歌词,微软雅黑,14,&H00FFFFFF,&H00000000,&H00000000,&H00000000,0,-1,0,0,100,100,0,0,1,1,0,1,25,5,43,1
+Style: 歌词,方正卡通简体,14,&H00FFFFFF,&HFFFFFFFF,&H00000000,&H00000000,0,-1,0,0,100,100,0,0,1,1,0,1,25,5,43,1
+Style: 歌词原文,方正卡通简体,14,&H00146EB3,&HFFFFFFFF,&H00000000,&H00000000,0,-1,0,0,100,100,0,0,1,1,0,1,25,5,43,1
 
 [Events]
 Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
@@ -120,7 +121,7 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
 
     # match song: ``
     pattern = re.compile(r'\d{1,4}\r\n(\d{1,2}:\d{1,2}:\d{1,2}\.\d{1,3}) ?--> ?(\d{1,2}:\d{1,2}:\d{1,2}\.\d{1,3})\r\n(.+)\r\n(.*♪.*♪.*)\r\n')
-    tmp = pattern.sub(r'Dialogue: 0,\1,\2,歌词,,0,0,0,,\3\\N{\\rEN}\4', tmp)
+    tmp = pattern.sub(r'Dialogue: 0,\1,\2,歌词,,0,0,0,,\3\\N{\\r歌词原文}\4', tmp)
     pattern = re.compile(r'\d{1,4}\r\n(\d{1,2}:\d{1,2}:\d{1,2}\.\d{1,3}) ?--> ?(\d{1,2}:\d{1,2}:\d{1,2}\.\d{1,3})\r\n(.+)\r\n(.+)\r\n')
     tmp = pattern.sub(r'Dialogue: 0,\1,\2,Default,,0,0,0,,\3\\N{\\rEN}\4', tmp)
 
