@@ -15,6 +15,7 @@ SUPPORTED_LANGUAGES = [
     {"code": "EL", "language": "Greek"},
     {"code": "HU", "language": "Hungarian"},
     {"code": "IT", "language": "Italian"},
+    {"code": "IT", "language": "ita"},
     {"code": "JA", "language": "Japanese"},
     {"code": "LV", "language": "Latvian"},
     {"code": "LT", "language": "Lithuanian"},
