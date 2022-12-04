@@ -15,7 +15,7 @@ def simple_translate_srt(origin_sub: list, src_lang: str, target_lang: str, engi
     # Initialize a translator
     t = Translator(engine)
 
-    sen_list = [sub.content.replace('\n', '') for sub in origin_sub]
+    sen_list = [sub.content.replace('<i>', '').replace('</i>', '').replace('\n', '') for sub in origin_sub]
 
     # Translate the subtitle and split into list
     translated_sen = t.translate_lines(sen_list, src_lang, target_lang)
