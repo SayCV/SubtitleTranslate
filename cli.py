@@ -58,7 +58,7 @@ def run_translate():
     parser.add_argument(
         '--engine',
         dest='engine',
-        default='deepl',
+        default='youdao',
         help='Define the trans engine: baidu, google, bing')
     parser.add_argument(
         '--model',
