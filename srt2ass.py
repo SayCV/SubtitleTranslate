@@ -36,7 +36,7 @@ YCbCr Matrix: None
 
 [V4+ Styles]
 Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
-Style: Default,sarasa-mono,26,&H00FFFFFF,&H00000000,&H00000000,&H00FF8000,0,0,0,0,100,100,0,0.00,1,2,1,2,5,5,6,134
+Style: Default,sarasa-mono,28,&H00FFFFFF,&H00000000,&H00000000,&H00FF8000,0,0,0,0,100,100,0,0.00,1,2,1,2,5,5,6,134
 Style: EN,DejaVu Sans Mono,16,&H006CB5DE,&HF0000000,&H80000000,&H00934A21,0,0,0,0,100,100,0,0.00,1,2,1,2,5,5,6,134
 Style: 注释,微软雅黑,18,&H00FFFFFF,&HFF000000,&H00000000,&H00000000,0,0,0,0,100,100,0,0,1,0,0.5,8,0,0,5,1
 Style: 特效,微软雅黑,20,&H00FFFFFF,&HFF000000,&H00000000,&H00000000,0,0,0,0,100,100,0,0,1,0,0,2,5,5,5,1
