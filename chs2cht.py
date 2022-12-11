@@ -1,8 +1,7 @@
 from zh_langconv import *
 import os
 import argparse
-
-from utils import fileopen
+import chardet
 
 def simple2tradition(line):
     # 将简体转换成繁体
@@ -30,15 +29,17 @@ def SimplifiedToTraditional(line):  # 简体转繁体
 
 def write_file(input_file, output_file, model='chs2cht'):
     """写入文件"""
-    tmp = fileopen(input_file).decode().split('\n')
-    with open(output_file, 'w', encoding='utf-8')as f2:
-        # content = f1.readlines()
-        for i in tmp:
-            if model == 'chs2cht':
-                con = ''.join(SimplifiedToTraditional(i))
-            else:
-                con = ''.join(TraditionalToSimplified(i))
-            f2.write(con)
+    with open(input_file, 'rb') as input_opened_file:
+        char_enc = chardet.detect(input_opened_file.read())['encoding']
+    with open(input_file, 'r', encoding=char_enc)as f1:
+        with open(output_file, 'w', encoding="utf-8")as f2:
+            content = f1.readlines()
+            for i in content:
+                if model == 'chs2cht':
+                    con = ''.join(SimplifiedToTraditional(i))
+                else:
+                    con = ''.join(TraditionalToSimplified(i))
+                f2.write(con)
 
 
 def run_chs2cht():
