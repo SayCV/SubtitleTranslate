@@ -31,7 +31,9 @@ def write_file(input_file, output_file, model='chs2cht'):
     """写入文件"""
     with open(input_file, 'rb') as input_opened_file:
         char_enc = chardet.detect(input_opened_file.read())['encoding']
-    with open(input_file, 'r', encoding=char_enc)as f1:
+        if char_enc == 'gb2312' or char_enc == 'gbk':
+            char_enc = 'gb18030'
+    with open(input_file, 'r', encoding=char_enc, errors='ignore')as f1:
         with open(output_file, 'w', encoding="utf-8")as f2:
             content = f1.readlines()
             for i in content:
