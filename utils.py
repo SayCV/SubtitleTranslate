@@ -3,6 +3,24 @@ from util_trans import Translator
 import srt
 import os
 import copy
+import chardet
+
+def fileopen(input_file):
+    with open(input_file, 'rb') as tmp:
+        file_str = tmp.read()
+        coding = chardet.detect(file_str)['encoding']
+        print (coding)
+        if ('UTF-16' in coding):
+            tmp = file_str.decode('utf-16', 'ignore').encode('utf-8')
+        elif ('GB2312' in coding or 'GBK' in coding):
+            tmp = file_str.decode('gbk', 'ignore').encode('utf-8')
+        elif ('Big5' in coding):
+            tmp = file_str.decode('big5', 'ignore').encode('utf-8')
+        elif ('UTF-8-SIG' in coding):
+            tmp = file_str.decode('UTF-8-SIG', 'ignore').encode('utf-8')
+        else:
+            tmp = file_str.decode('utf-8', 'ignore').encode('utf-8')
+    return tmp
 
 def simple_translate_srt(origin_sub: list, src_lang: str, target_lang: str, engine: str) -> list:
     """
