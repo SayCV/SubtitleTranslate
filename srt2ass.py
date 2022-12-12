@@ -3,6 +3,7 @@ import sys
 import os
 import re
 import codecs
+import math
 
 import argparse
 
@@ -170,10 +171,11 @@ def auto_counts_sub(value, video_type):
             "40": 17, "41": 17,
         },
          "tv": {
-            "18": 28, 
-            "19": 27, 
-            "20": 26, 
-            "21": 24, 
+            "17": 27,
+            "18": 26, 
+            "19": 25, 
+            "20": 24, 
+            "21": 23, 
             "22": 23, 
             "23": 22, 
             "24": 21, "57": 9,
@@ -212,7 +214,7 @@ def auto_counts_sub(value, video_type):
         str3_size = 24 - 2*gap
     if video_type == 'movie':
         if str3_len >= 3*24 and str3_len <= 3*57:
-            str3_size = string_to_limit_size[video_type][str(int(str3_len/3))]
+            str3_size = string_to_limit_size[video_type][str(math.ceil(str3_len/3))]
         else:
             str3_size = 8
 
@@ -223,12 +225,12 @@ def auto_counts_sub(value, video_type):
             ret = r'Dialogue: 0,%s,%s,Default,,0,0,0,,{\fs%d}%s\N{\rEN}%s ' % (
                 str1, str2, str3_size, str3, str4)
     else:
-        if str3_len >= 3*18 and str3_len <= 3*57:
-            str3_size = string_to_limit_size[video_type][str(int(str3_len/3))]
+        if str3_len >= 3*17 and str3_len <= 3*57:
+            str3_size = string_to_limit_size[video_type][str(math.ceil(str3_len/3))]
         else:
             str3_size = 8
 
-        if str3_len < 3*18:
+        if str3_len < 3*17:
             ret = r'Dialogue: 0,%s,%s,Default,,0,0,0,,%s\N{\rEN}%s ' % (
                 str1, str2, str3, str4)
         else:
