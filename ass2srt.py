@@ -3,7 +3,7 @@ import sys
 import chardet
 
 def replace_ass_n_by_system_n(str_temp):
-    return str_temp.replace(r'\N', '\n')
+    return str_temp.replace(r'\N{\rEN}', '\n').replace(r'\N', '\n')
 
 
 def replace_italic_tags(str_temp):
