@@ -47,8 +47,8 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
     tmp = fileopen(input_file).decode()
 
     tmp = tmp + '\r\n\r\n'
-    tmp = tmp.replace('{', '')
-    tmp = tmp.replace('}', '')
+    #tmp = tmp.replace('{', '')
+    #tmp = tmp.replace('}', '')
 
     # match timestamp: `00:00:06,000` -> 00:00:06.000
     pattern = re.compile(r'(\d{1,2}:\d{1,2}:\d{1,2}),(\d{1,3})')
